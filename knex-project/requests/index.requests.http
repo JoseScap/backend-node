@@ -2,6 +2,11 @@
 
 ### Create Product
 POST {{host}}/api/create-product
+Content-Type: application/json
+
+{
+    "name": "Milk"
+}
 
 ### List all products
 GET {{host}}/api/list-all-products
