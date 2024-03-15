@@ -1,0 +1,4 @@
+@host = http://localhost:4000
+
+### Create Product
+POST {{host}}/api/create-product
