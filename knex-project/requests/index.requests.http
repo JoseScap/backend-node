@@ -2,3 +2,6 @@
 
 ### Create Product
 POST {{host}}/api/create-product
+
+### List all products
+GET {{host}}/api/list-all-products
