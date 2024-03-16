@@ -1,7 +1,7 @@
 const Router = require('express').Router
-const { createProduct, listAllProducts, deleteProductById } = require('../controllers/product.controllers')
+const { createProduct, listAllProducts, deleteProductById, listProductById } = require('../controllers/product.controllers')
 const { validate } = require('../middlewares/common.middlewares')
-const { createProductValidation, deleteProductByIdValidation } = require('../middlewares/product.middlewares')
+const { createProductValidation, deleteProductByIdValidation, listProductByIdValidation } = require('../middlewares/product.middlewares')
 
 const productRouter = Router()
 /**
@@ -80,5 +80,31 @@ productRouter.get('/list-all-products', listAllProducts)
  *         description: Internal server error. Something went wrong.
  */
 productRouter.delete('/delete-product-by-id', validate(deleteProductByIdValidation), deleteProductById)
+/**
+ * @openapi
+ * /api/products/list-product-by-id:
+ *   get:
+ *     summary: Get product details by ID.
+ *     description: Retrieves details of a product from the system by its ID.
+ *     tags:
+ *       - Products
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The ID of the product to retrieve.
+ *     responses:
+ *       200:
+ *         description: Product details retrieved successfully.
+ *       400:
+ *         description: Bad request. The request body is missing or invalid.
+ *       404:
+ *         description: Product not found. The specified ID does not exist.
+ *       500:
+ *         description: Internal server error. Something went wrong.
+ */
+productRouter.get('/list-product-by-id', validate(listProductByIdValidation), listProductById)
 
 module.exports = productRouter

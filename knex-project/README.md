@@ -17,11 +17,11 @@ Knex Project is a project aimed at practicing Node.js and learning about Knex, a
 
 #### Products
 
-- [ ] Create product.
+- [x] Create product.
 - [ ] Create product bulk.
-- [ ] List all products.
-- [ ] List a product by ID.
-- [ ] Delete product by ID.
+- [x] List all products.
+- [x] List a product by ID.
+- [x] Delete product by ID.
 - [ ] Delete products by ID bulk.
 
 #### Users

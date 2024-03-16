@@ -1,5 +1,5 @@
 const db = require("../db")
-const { badRequestResponse, fatalErrorResponse, okResponse, noContentResponse, createdResponse } = require("../utils/response.utils")
+const { fatalErrorResponse, okResponse, noContentResponse, createdResponse, notFoundResponse } = require("../utils/response.utils")
 
 /**
  * Creates a new product.
@@ -70,9 +70,37 @@ const deleteProductById = async (req, res) => {
   }
 };
 
+/**
+ * Write a description
+ * 
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
+ */
+const listProductById = async (req, res) => {
+  const { id } = req.query;
+  try {
+    // Delete the product from the database by its ID
+    const products = await db.select().from('products').where('id', id);
+    
+    if (products.length === 0) {
+      notFoundResponse(res, `Product with \'id\' ${id} does not exist`)
+      return undefined
+    }
+
+    // Respond with a success status code
+    okResponse(res, products);
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.log(error);
+    
+    // Respond with a fatal error message if something goes wrong
+    fatalErrorResponse(res, 'Something went wrong');
+  }
+};
 
 module.exports = {
   createProduct,
   listAllProducts,
-  deleteProductById
+  deleteProductById,
+  listProductById
 }
