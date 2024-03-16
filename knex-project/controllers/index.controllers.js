@@ -2,63 +2,97 @@ const db = require("../db")
 const { badRequestResponse, fatalErrorResponse, okResponse, noContentResponse } = require("../utils/response.utils")
 
 /**
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ * Creates a new product.
+ * 
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
  */
 const createProduct = async (req, res) => {
-  const { name, description } = req.body
+  const { name, description } = req.body;
+
+  // Check if the 'name' property is provided in the request body
   if (!name) {
-    badRequestResponse(res, 'Name is mandatory')
-    return undefined
+    // Respond with a bad request error if 'name' is missing
+    badRequestResponse(res, 'Name is mandatory');
+    return undefined; // Exit function early
   }
 
   try {
-    const product = await db.table('products').insert({ name, description })
-    okResponse(res, product)
+    // Insert the new product into the database
+    const product = await db.table('products').insert({ name, description });
+
+    // Respond with the newly created product
+    okResponse(res, product);
   } catch (error) {
-    console.log(error)
-    fatalErrorResponse(res, 'Something went wrong')
+    // Log the error for debugging purposes
+    console.log(error);
+    // Respond with a fatal error message if something goes wrong during insertion
+    fatalErrorResponse(res, 'Something went wrong');
   }
-}
+};
+
 
 /**
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ * Lists all products.
+ * 
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
  */
 const listAllProducts = async (req, res) => {
   try {
-    const products = await db.table('products')
-    okResponse(res, products)
+    // Retrieve all products from the database
+    const products = await db.table('products');
+    
+    // Respond with the list of products
+    okResponse(res, products);
   } catch (error) {
-    console.log(error)
-    fatalErrorResponse(res, 'Something went wrong')
+    // Log the error for debugging purposes
+    console.log(error);
+    
+    // Respond with a fatal error message if something goes wrong
+    fatalErrorResponse(res, 'Something went wrong');
   }
-}
+};
+
 
 /**
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ * Deletes a product by its ID.
+ * 
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
  */
 const deleteProductById = async (req, res) => {
-  const { id } = req.body 
+  const { id } = req.body;
+
+  // Check if 'id' is provided in the request body
   if (!id) {
-    badRequestResponse(res, 'Id is mandatory')
-    return undefined
+    // Respond with a bad request error if 'id' is missing
+    badRequestResponse(res, 'Id is mandatory');
+    return undefined; // Exit function early
   }
 
+  // Check if 'id' is an integer
   if (!Number.isInteger(id)) {
-    badRequestResponse(res, 'Id must be an integer')
-    return undefined
+    // Respond with a bad request error if 'id' is not an integer
+    badRequestResponse(res, 'Id must be an integer');
+    return undefined; // Exit function early
   }
 
   try {
-    await db.table('products').where('id', id).del()
-    noContentResponse(res)
+    // Delete the product from the database by its ID
+    await db.table('products').where('id', id).del();
+    
+    // Respond with a success status code
+    noContentResponse(res);
   } catch (error) {
-    console.log(error)
-    fatalErrorResponse(res, 'Something went wrong')
+    // Log the error for debugging purposes
+    console.log(error);
+    
+    // Respond with a fatal error message if something goes wrong
+    fatalErrorResponse(res, 'Something went wrong');
   }
-}
+};
+
 
 module.exports = {
   createProduct,

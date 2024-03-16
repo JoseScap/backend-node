@@ -17,5 +17,5 @@ DELETE {{host}}/api/delete-product-by-id
 Content-Type: application/json
 
 {
-    "id": 7
+    "id": 8
 }
