@@ -10,3 +10,12 @@ Content-Type: application/json
 
 ### List all products
 GET {{host}}/api/list-all-products
+
+
+### Delete product by id
+DELETE {{host}}/api/delete-product-by-id
+Content-Type: application/json
+
+{
+    "id": 7
+}

@@ -16,7 +16,7 @@ const badRequestResponse = (errors) => {
   }
 }
 
-const fatalErrorResponse = (error) => {
+const fatalErrorResponse = (errors) => {
   let array = []
   if (Array.isArray(errors)) array = errors
   else array = [errors]
