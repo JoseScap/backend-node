@@ -29,9 +29,15 @@ const createProductsBulkValidation = [
     })
 ];
 
+const deleteProductsByIdBulkValidation = [
+    query('ids').isArray().withMessage('The IDs parameter must be an array'),
+    query('ids.*').isInt().withMessage('All IDs must be integers')
+]
+
 module.exports = {
     createProductValidation,
     deleteProductByIdValidation,
     listProductByIdValidation,
-    createProductsBulkValidation
+    createProductsBulkValidation,
+    deleteProductsByIdBulkValidation
 }

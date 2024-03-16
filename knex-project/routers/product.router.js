@@ -1,7 +1,7 @@
 const Router = require('express').Router
-const { createProduct, listAllProducts, deleteProductById, listProductById, createProductsBulk } = require('../controllers/product.controllers')
+const { createProduct, listAllProducts, deleteProductById, listProductById, createProductsBulk, deleteProductsByIdBulk } = require('../controllers/product.controllers')
 const { validate } = require('../middlewares/common.middlewares')
-const { createProductValidation, deleteProductByIdValidation, listProductByIdValidation, createProductsBulkValidation } = require('../middlewares/product.middlewares')
+const { createProductValidation, deleteProductByIdValidation, listProductByIdValidation, createProductsBulkValidation, deleteProductsByIdBulkValidation } = require('../middlewares/product.middlewares')
 
 const productRouter = Router()
 /**
@@ -135,5 +135,31 @@ productRouter.get('/list-product-by-id', validate(listProductByIdValidation), li
  *         description: Internal server error. Something went wrong.
  */
 productRouter.post('/create-products-bulk', validate(createProductsBulkValidation), createProductsBulk)
+/**
+ * @openapi
+ * /api/products/delete-products-by-id-bulk:
+ *   delete:
+ *     summary: Delete products by IDs in bulk.
+ *     description: Deletes multiple products from the system by their IDs in bulk.
+ *     tags:
+ *       - Products
+ *     parameters:
+ *       - in: query
+ *         name: ids
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: integer
+ *         required: true
+ *         description: An array containing the IDs of the products to delete.
+ *     responses:
+ *       204:
+ *         description: Products deleted successfully.
+ *       400:
+ *         description: Bad request. The IDs parameter is missing or invalid.
+ *       500:
+ *         description: Internal server error. Something went wrong.
+ */
+productRouter.delete('/delete-products-by-id-bulk', validate(deleteProductsByIdBulkValidation), deleteProductsByIdBulk)
 
 module.exports = productRouter

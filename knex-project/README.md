@@ -22,7 +22,7 @@ Knex Project is a project aimed at practicing Node.js and learning about Knex, a
 - [x] List all products.
 - [x] List a product by ID.
 - [x] Delete product by ID.
-- [ ] Delete products by ID bulk.
+- [x] Delete products by ID bulk.
 
 #### Users
 

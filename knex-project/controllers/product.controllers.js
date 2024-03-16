@@ -121,10 +121,35 @@ const createProductsBulk = async (req, res) => {
   }
 }
 
+/**
+ * Handles the deletion of multiple products by their IDs in bulk.
+ * 
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
+ */
+const deleteProductsByIdBulk = async (req, res) => {
+  // Extract the IDs from the query parameters
+  const { ids } = req.query;
+  try {
+    // Delete the products from the database by their IDs
+    await db.table('products').whereIn('id', ids).del();
+    
+    // Respond with a success status code (204 No Content)
+    noContentResponse(res);
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.error(error);
+    
+    // Respond with a fatal error message if something goes wrong
+    fatalErrorResponse(res, 'Something went wrong');
+  }
+};
+
 module.exports = {
   createProduct,
   listAllProducts,
   deleteProductById,
   listProductById,
-  createProductsBulk
+  createProductsBulk,
+  deleteProductsByIdBulk
 }
