@@ -1,7 +1,7 @@
 const Router = require('express').Router
-const { createProduct, listAllProducts, deleteProductById, listProductById } = require('../controllers/product.controllers')
+const { createProduct, listAllProducts, deleteProductById, listProductById, createProductsBulk } = require('../controllers/product.controllers')
 const { validate } = require('../middlewares/common.middlewares')
-const { createProductValidation, deleteProductByIdValidation, listProductByIdValidation } = require('../middlewares/product.middlewares')
+const { createProductValidation, deleteProductByIdValidation, listProductByIdValidation, createProductsBulkValidation } = require('../middlewares/product.middlewares')
 
 const productRouter = Router()
 /**
@@ -106,5 +106,39 @@ productRouter.delete('/delete-product-by-id', validate(deleteProductByIdValidati
  *         description: Internal server error. Something went wrong.
  */
 productRouter.get('/list-product-by-id', validate(listProductByIdValidation), listProductById)
+/**
+ * @openapi
+ * /api/products/create-products-bulk:
+ *   post:
+ *     summary: Create multiple products at once.
+ *     description: Create multiple products at once by providing an array of product objects.
+ *     tags:
+ *       - Products
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: array
+ *             items:
+ *               type: object
+ *               properties:
+ *                 name:
+ *                   type: string
+ *                   description: The name of the product.
+ *                 description:
+ *                   type: string
+ *                   description: The description of the product.
+ *               required:
+ *                 - name
+ *     responses:
+ *       201:
+ *         description: Products created successfully.
+ *       400:
+ *         description: Bad request. The request body is missing or invalid.
+ *       500:
+ *         description: Internal server error. Something went wrong.
+ */
+productRouter.post('/create-products-bulk', validate(createProductsBulkValidation), createProductsBulk)
 
 module.exports = productRouter

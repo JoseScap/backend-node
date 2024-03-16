@@ -98,9 +98,33 @@ const listProductById = async (req, res) => {
   }
 };
 
+/**
+ * Handles the creation of multiple products in bulk.
+ * 
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
+ */
+const createProductsBulk = async (req, res) => {
+  // Extract the array of products from the request body
+  const products = req.body;
+  try {
+    // Insert the new products into the database
+    const createdProducts = await db.table('products').insert(products);
+    
+    // Respond with the newly created products
+    createdResponse(res, createdProducts);
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.log(error);
+    // Respond with a fatal error message if something goes wrong during insertion
+    fatalErrorResponse(res, 'Something went wrong');
+  }
+}
+
 module.exports = {
   createProduct,
   listAllProducts,
   deleteProductById,
-  listProductById
+  listProductById,
+  createProductsBulk
 }
