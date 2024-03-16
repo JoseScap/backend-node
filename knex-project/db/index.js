@@ -7,14 +7,20 @@ const knex = require('knex')({
   },
   useNullAsDefault: true,
   log: {
-    debug: function(message) { console.log(message) }
+    debug: function (message) { console.log(message) }
   }
 });
 
-knex.schema.createTableIfNotExists('products', function(table) {
-  table.increments()
-  table.string('name')
-  table.string('description').nullable()
-}).then(response => console.log('`products` table: ', response)).catch((error) => console.log(error))
+(async function knexSetup(){
+  const productsExists = await knex.schema.hasTable('products')
+  if (!productsExists) {
+    knex.schema.createTable('products', table => {
+      table.increments()
+      table.string('name')
+      table.string('description').nullable()
+    })
+  }
+})()
+
 
 module.exports = knex
