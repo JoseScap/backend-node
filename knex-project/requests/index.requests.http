@@ -5,6 +5,7 @@ POST {{host}}/api/create-product
 Content-Type: application/json
 
 {
+    "name": "Milk"
 }
 
 ### List all products
@@ -16,5 +17,5 @@ DELETE {{host}}/api/delete-product-by-id
 Content-Type: application/json
 
 {
-    "id": 8
+    "id": 0
 }

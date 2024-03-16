@@ -6,6 +6,12 @@ const createProductValidation = [
     body('description').optional().isString().withMessage('Field \'description\' must be a string')
 ]
 
+const deleteProductByIdValidation = [
+    body('id').notEmpty().withMessage('Field \'id\' is required'),
+    body('id').isInt().withMessage('Field \'id\' must be an integer')
+]
+
 module.exports = {
-    createProductValidation
+    createProductValidation,
+    deleteProductByIdValidation
 }

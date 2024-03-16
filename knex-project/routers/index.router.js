@@ -1,6 +1,6 @@
 const { createProduct, listAllProducts, deleteProductById } = require('../controllers/index.controllers')
 const { validate } = require('../middlewares/common.middlewares')
-const { createProductValidation } = require('../middlewares/product.middlewares')
+const { createProductValidation, deleteProductByIdValidation } = require('../middlewares/product.middlewares')
 
 const rootRouter = require('express').Router()
 
@@ -36,6 +36,6 @@ const rootRouter = require('express').Router()
  */
 rootRouter.post('/create-product', validate(createProductValidation), createProduct)
 rootRouter.get('/list-all-products', listAllProducts)
-rootRouter.delete('/delete-product-by-id', deleteProductById)
+rootRouter.delete('/delete-product-by-id', validate(deleteProductByIdValidation), deleteProductById)
 
 module.exports = rootRouter

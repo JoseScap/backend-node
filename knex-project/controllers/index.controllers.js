@@ -9,26 +9,6 @@ const { badRequestResponse, fatalErrorResponse, okResponse, noContentResponse, c
  */
 const createProduct = async (req, res) => {
   const { name, description } = req.body;
-
-  // Check if the 'name' property is provided in the request body
-  if (!name) {
-    // Respond with a bad request error if 'name' is missing
-    badRequestResponse(res, 'Field \'name\' is mandatory');
-    return undefined; // Exit function early
-  }
-
-  if (typeof name !== 'string') {
-    // Respond with a bad request error if 'name' is not a string
-    badRequestResponse(res, 'Field \'name\' must be a string');
-    return undefined; // Exit function early
-  }
-
-  if (!!description && typeof description !== 'string') {
-    // Respond with a bad request error if 'description' is not a string
-    badRequestResponse(res, 'Field \'description\' must b a string');
-    return undefined; // Exit function early
-  }
-
   try {
     // Insert the new product into the database
     const product = await db.table('products').insert({ name, description });
@@ -75,21 +55,6 @@ const listAllProducts = async (req, res) => {
  */
 const deleteProductById = async (req, res) => {
   const { id } = req.body;
-
-  // Check if 'id' is provided in the request body
-  if (!id) {
-    // Respond with a bad request error if 'id' is missing
-    badRequestResponse(res, 'Id is mandatory');
-    return undefined; // Exit function early
-  }
-
-  // Check if 'id' is an integer
-  if (!Number.isInteger(id)) {
-    // Respond with a bad request error if 'id' is not an integer
-    badRequestResponse(res, 'Id must be an integer');
-    return undefined; // Exit function early
-  }
-
   try {
     // Delete the product from the database by its ID
     await db.table('products').where('id', id).del();
