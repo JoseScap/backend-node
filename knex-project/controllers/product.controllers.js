@@ -23,6 +23,28 @@ const createProduct = async (req, res) => {
   }
 };
 
+/**
+ * Handles the creation of multiple products in bulk.
+ * 
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
+ */
+const createProductsBulk = async (req, res) => {
+  // Extract the array of products from the request body
+  const products = req.body;
+  try {
+    // Insert the new products into the database
+    const createdProducts = await db.table('products').insert(products);
+    
+    // Respond with the newly created products
+    createdResponse(res, createdProducts);
+  } catch (error) {
+    // Log the error for debugging purposes
+    console.log(error);
+    // Respond with a fatal error message if something goes wrong during insertion
+    fatalErrorResponse(res, 'Something went wrong');
+  }
+}
 
 /**
  * Lists all products.
@@ -37,30 +59,6 @@ const listAllProducts = async (req, res) => {
     
     // Respond with the list of products
     okResponse(res, products);
-  } catch (error) {
-    // Log the error for debugging purposes
-    console.log(error);
-    
-    // Respond with a fatal error message if something goes wrong
-    fatalErrorResponse(res, 'Something went wrong');
-  }
-};
-
-
-/**
- * Deletes a product by its ID.
- * 
- * @param {import('express').Request} req The request object.
- * @param {import('express').Response} res The response object.
- */
-const deleteProductById = async (req, res) => {
-  const { id } = req.query;
-  try {
-    // Delete the product from the database by its ID
-    await db.table('products').where('id', id).del();
-    
-    // Respond with a success status code
-    noContentResponse(res);
   } catch (error) {
     // Log the error for debugging purposes
     console.log(error);
@@ -99,27 +97,27 @@ const listProductById = async (req, res) => {
 };
 
 /**
- * Handles the creation of multiple products in bulk.
+ * Deletes a product by its ID.
  * 
  * @param {import('express').Request} req The request object.
  * @param {import('express').Response} res The response object.
  */
-const createProductsBulk = async (req, res) => {
-  // Extract the array of products from the request body
-  const products = req.body;
+const deleteProductById = async (req, res) => {
+  const { id } = req.query;
   try {
-    // Insert the new products into the database
-    const createdProducts = await db.table('products').insert(products);
+    // Delete the product from the database by its ID
+    await db.table('products').where('id', id).del();
     
-    // Respond with the newly created products
-    createdResponse(res, createdProducts);
+    // Respond with a success status code
+    noContentResponse(res);
   } catch (error) {
     // Log the error for debugging purposes
     console.log(error);
-    // Respond with a fatal error message if something goes wrong during insertion
+    
+    // Respond with a fatal error message if something goes wrong
     fatalErrorResponse(res, 'Something went wrong');
   }
-}
+};
 
 /**
  * Handles the deletion of multiple products by their IDs in bulk.
@@ -147,9 +145,9 @@ const deleteProductsByIdBulk = async (req, res) => {
 
 module.exports = {
   createProduct,
-  listAllProducts,
-  deleteProductById,
-  listProductById,
   createProductsBulk,
-  deleteProductsByIdBulk
+  listAllProducts,
+  listProductById,
+  deleteProductById,
+  deleteProductsByIdBulk,
 }

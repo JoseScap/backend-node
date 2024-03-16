@@ -6,16 +6,6 @@ const createProductValidation = [
     body('description').optional().isString().withMessage('Field \'description\' must be a string')
 ]
 
-const deleteProductByIdValidation = [
-    query('id').notEmpty().withMessage('Field \'id\' is required'),
-    query('id').isInt().withMessage('Field \'id\' must be an integer')
-]
-
-const listProductByIdValidation = [
-    query('id').notEmpty().withMessage('Field \'id\' is required'),
-    query('id').isInt().withMessage('Field \'id\' must be an integer')
-]
-
 const createProductsBulkValidation = [
     body().isArray().withMessage('Request body must be an array'),
     body('*').custom((value, { req }) => {
@@ -29,6 +19,16 @@ const createProductsBulkValidation = [
     })
 ];
 
+const listProductByIdValidation = [
+    query('id').notEmpty().withMessage('Field \'id\' is required'),
+    query('id').isInt().withMessage('Field \'id\' must be an integer')
+]
+
+const deleteProductByIdValidation = [
+    query('id').notEmpty().withMessage('Field \'id\' is required'),
+    query('id').isInt().withMessage('Field \'id\' must be an integer')
+]
+
 const deleteProductsByIdBulkValidation = [
     query('ids').isArray().withMessage('The IDs parameter must be an array'),
     query('ids.*').isInt().withMessage('All IDs must be integers')
@@ -36,8 +36,8 @@ const deleteProductsByIdBulkValidation = [
 
 module.exports = {
     createProductValidation,
-    deleteProductByIdValidation,
-    listProductByIdValidation,
     createProductsBulkValidation,
-    deleteProductsByIdBulkValidation
+    listProductByIdValidation,
+    deleteProductByIdValidation,
+    deleteProductsByIdBulkValidation,
 }
