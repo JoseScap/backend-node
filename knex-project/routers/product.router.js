@@ -59,23 +59,18 @@ productRouter.get('/list-all-products', listAllProducts)
  *     description: Deletes a product from the system by its ID.
  *     tags:
  *       - Products
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               id:
- *                 type: integer
- *                 description: The ID of the product to delete.
- *             required:
- *               - id
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The ID of the product to delete.
  *     responses:
  *       204:
  *         description: Product deleted successfully.
  *       400:
- *         description: Bad request. The request body is missing or invalid.
+ *         description: Bad request. The ID parameter is missing or invalid.
  *       500:
  *         description: Internal server error. Something went wrong.
  */

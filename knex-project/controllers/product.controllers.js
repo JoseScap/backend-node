@@ -54,7 +54,7 @@ const listAllProducts = async (req, res) => {
  * @param {import('express').Response} res The response object.
  */
 const deleteProductById = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
   try {
     // Delete the product from the database by its ID
     await db.table('products').where('id', id).del();

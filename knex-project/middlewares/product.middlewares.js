@@ -7,8 +7,8 @@ const createProductValidation = [
 ]
 
 const deleteProductByIdValidation = [
-    body('id').notEmpty().withMessage('Field \'id\' is required'),
-    body('id').isInt().withMessage('Field \'id\' must be an integer')
+    query('id').notEmpty().withMessage('Field \'id\' is required'),
+    query('id').isInt().withMessage('Field \'id\' must be an integer')
 ]
 
 const listProductByIdValidation = [
