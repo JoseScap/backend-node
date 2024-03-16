@@ -5,7 +5,6 @@ POST {{host}}/api/create-product
 Content-Type: application/json
 
 {
-    "name": "Milk"
 }
 
 ### List all products
