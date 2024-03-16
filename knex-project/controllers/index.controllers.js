@@ -13,7 +13,19 @@ const createProduct = async (req, res) => {
   // Check if the 'name' property is provided in the request body
   if (!name) {
     // Respond with a bad request error if 'name' is missing
-    badRequestResponse(res, 'Name is mandatory');
+    badRequestResponse(res, 'Field \'name\' is mandatory');
+    return undefined; // Exit function early
+  }
+
+  if (typeof name !== 'string') {
+    // Respond with a bad request error if 'name' is not a string
+    badRequestResponse(res, 'Field \'name\' must be a string');
+    return undefined; // Exit function early
+  }
+
+  if (!!description && typeof description !== 'string') {
+    // Respond with a bad request error if 'description' is not a string
+    badRequestResponse(res, 'Field \'description\' must b a string');
     return undefined; // Exit function early
   }
 
