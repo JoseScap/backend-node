@@ -1,7 +1,7 @@
 const Router = require('express').Router
-const { createProduct, listAllProducts, deleteProductById, listProductById, createProductsBulk, deleteProductsByIdBulk } = require('../controllers/product.controllers')
+const { createProduct, listAllProducts, deleteProductById, listProductById, createProductsBulk, deleteProductsByIdBulk, listProductsByFilters } = require('../controllers/product.controllers')
 const { validate } = require('../middlewares/common.middlewares')
-const { createProductValidation, deleteProductByIdValidation, listProductByIdValidation, createProductsBulkValidation, deleteProductsByIdBulkValidation } = require('../middlewares/product.middlewares')
+const { createProductValidation, deleteProductByIdValidation, listProductByIdValidation, createProductsBulkValidation, deleteProductsByIdBulkValidation, listProductsByFiltersValidation } = require('../middlewares/product.middlewares')
 
 const productRouter = Router()
 /**
@@ -111,6 +111,71 @@ productRouter.get('/list-all-products', listAllProducts)
  *         description: Internal server error. Something went wrong.
  */
 productRouter.get('/list-product-by-id', validate(listProductByIdValidation), listProductById)
+/**
+ * @openapi
+ * /api/products/list-products-by-filters:
+ *   get:
+ *     summary: Get products based on filters.
+ *     description: Retrieves products from the system based on specified filters.
+ *     tags:
+ *       - Products
+ *     parameters:
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: The name of the product to filter by.
+ *       - in: query
+ *         name: nameLike
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: The partial name of the product to filter by.
+ *       - in: query
+ *         name: descriptionLike
+ *         schema:
+ *           type: string
+ *         required: false
+ *         description: The partial description of the product to filter by.
+ *       - in: query
+ *         name: orderBy
+ *         schema:
+ *           type: string
+ *           enum: [id, name, description]
+ *         required: false
+ *         description: The field by which to order the products. Only 'id', 'name', or 'description' are allowed. Defaults to 'id'.
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *           enum: [asc, desc]
+ *         required: false
+ *         description: The order direction ('asc' for ascending, 'desc' for descending). Defaults to 'asc'.
+ *       - in: query
+ *         name: itemsPerPage
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 20
+ *         required: false
+ *         description: The number of products to display per page (minimum 1, maximum 20).
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *         required: false
+ *         description: The page number of the results to retrieve (minimum 1).
+ *     responses:
+ *       200:
+ *         description: Products retrieved successfully.
+ *       400:
+ *         description: Bad request. The request contains invalid parameters.
+ *       500:
+ *         description: Internal server error. Something went wrong.
+ */
+productRouter.get('/list-products-by-filters', validate(listProductsByFiltersValidation), listProductsByFilters)
 /**
  * @openapi
  * /api/products/delete-product-by-id:

@@ -21,6 +21,7 @@ Knex Project is a project aimed at practicing Node.js and learning about Knex, a
 - [x] Create products bulk.
 - [x] List all products.
 - [x] List a product by ID.
+- [x] List products by filtering.
 - [x] Delete product by ID.
 - [x] Delete products by ID bulk.
 
