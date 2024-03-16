@@ -1,5 +1,5 @@
 const db = require("../db")
-const { badRequestResponse, fatalErrorResponse, okResponse, noContentResponse } = require("../utils/response.utils")
+const { badRequestResponse, fatalErrorResponse, okResponse, noContentResponse, createdResponse } = require("../utils/response.utils")
 
 /**
  * Creates a new product.
@@ -22,7 +22,7 @@ const createProduct = async (req, res) => {
     const product = await db.table('products').insert({ name, description });
 
     // Respond with the newly created product
-    okResponse(res, product);
+    createdResponse(res, product);
   } catch (error) {
     // Log the error for debugging purposes
     console.log(error);
