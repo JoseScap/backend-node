@@ -6,12 +6,12 @@ Knex Project is a project aimed at practicing Node.js and learning about Knex, a
 
 ### Project Structure
 
-- [x] Implement Express server. Example: [File](./index.js)
-- [x] Implement Express Validator. Examples: [File 1](./middlewares/common.middlewares.js); [File 2](./middlewares/product.middlewares.js)
-- [x] Implement a generic structure to create responses for every endpoint. Examples: [File](./utils/response.utils.js)
-- [x] Implement documentation with OpenAPI. Example: [File](./routers/product.router.js)
-- [x] Implement controllers modules. Example: [File](./controllers/product.controllers.js)
-- [x] Implement routers modules. Examples: [File 1](./routers/index.router.js); [File 2](./routers/product.router.js); 
+- [x] Implement Express server. Example: [Application](./index.js)
+- [x] Implement Express Validator. Examples: [Common middlewares](./middlewares/common.middlewares.js); [Product middlewares](./middlewares/product.middlewares.js)
+- [x] Implement a generic structure to create responses for every endpoint. Examples: [Response utilities](./utils/response.utils.js)
+- [x] Implement documentation with OpenAPI. Example: [Product router](./routers/product.router.js)
+- [x] Implement controllers modules. Example: [Product controller/module](./controllers/product.controllers.js)
+- [x] Implement routers modules. Examples: [Root router](./routers/index.router.js); [Product router](./routers/product.router.js); 
 
 ### Services
 
@@ -24,7 +24,7 @@ Knex Project is a project aimed at practicing Node.js and learning about Knex, a
 - [x] Delete product by ID.
 - [x] Delete products by ID bulk.
 
-[Location](./controllers/product.controllers.js)
+Location: [Product Module](./controllers/product.controllers.js)
 
 #### Users
 
