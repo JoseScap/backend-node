@@ -3,7 +3,10 @@ const { body, query } = require('express-validator')
 const createProductValidation = [
   body('name').notEmpty().withMessage('Field \'name\' is required'),
   body('name').isString().withMessage('Field \'name\' must be a string'),
-  body('description').optional().isString().withMessage('Field \'description\' must be a string')
+  body('description').optional().isString().withMessage('Field \'description\' must be a string'),
+  body('price').notEmpty().withMessage('Field \'price\' is required'),
+  body('price').isDecimal().withMessage('Field \'price\' must be a decimal number'),
+  body('price').isFloat({ min: 1 }).withMessage('Field \'price\' must have a minimum value of 1')
 ]
 
 const createProductsBulkValidation = [

@@ -18,6 +18,7 @@ const knex = require('knex')({
       table.increments()
       table.string('name').notNullable()
       table.string('description').nullable()
+      table.decimal('price', 10, 2).notNullable()
     })
   }
   const userTableExists = await knex.schema.hasTable('users')

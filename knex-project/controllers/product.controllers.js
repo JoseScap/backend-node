@@ -8,9 +8,9 @@ const { fatalErrorResponse, okResponse, noContentResponse, createdResponse, notF
  * @param {import('express').Response} res The response object.
  */
 const createProduct = async (req, res) => {
-  const { name, description } = req.body
+  const { name, description, price } = req.body
   try {
-    const product = await db.table('products').insert({ name, description })
+    const product = await db.table('products').insert({ name, description, price })
     createdResponse(res, product)
   } catch (error) {
     console.log(error)

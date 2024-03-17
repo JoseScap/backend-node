@@ -31,8 +31,14 @@ const productRouter = Router()
  *               description:
  *                 type: string
  *                 description: The description of the product.
+ *               price:
+ *                 type: number
+ *                 format: decimal
+ *                 minimum: 1
+ *                 description: The price of the product (must be a decimal number with a minimum value of 1).
  *             required:
  *               - name
+ *               - price
  *     responses:
  *       201:
  *         description: Product created successfully.
