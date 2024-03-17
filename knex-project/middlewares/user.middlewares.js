@@ -1,4 +1,4 @@
-const { body } = require("express-validator")
+const { body } = require('express-validator')
 
 const createUserValidation = [
   body('username').notEmpty().withMessage('Field \'username\' is required'),
@@ -6,19 +6,19 @@ const createUserValidation = [
   body('username').isAlphanumeric().withMessage('Field \'username\' must be alphanumeric'),
   body('username').custom((value, { req }) => {
     if (!/^[A-Za-z]/.test(value)) {
-      throw new Error('Username must start with a letter.');
+      throw new Error('Username must start with a letter.')
     }
-    return true;
+    return true
   }),
   body('password').notEmpty().withMessage('Field \'password\' is required'),
   body('password').isLength({ min: 8, max: 32 }),
   body('password').isAlphanumeric().withMessage('Field \'password\' must be alphanumeric'),
   body('password').custom((value, { req }) => {
     if (!/^[A-Za-z]/.test(value)) {
-      throw new Error('Username must start with a letter.');
+      throw new Error('Username must start with a letter.')
     }
-    return true;
-  }),
+    return true
+  })
 ]
 
 module.exports = {

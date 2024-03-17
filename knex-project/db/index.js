@@ -1,9 +1,10 @@
-const { SQLITE_FILENAME } = require('../config');
+/* eslint-disable space-before-function-paren */
+const { SQLITE_FILENAME } = require('../config')
 
 const knex = require('knex')({
   client: 'sqlite3',
   connection: {
-    filename: SQLITE_FILENAME,
+    filename: SQLITE_FILENAME
   },
   useNullAsDefault: true,
   log: {
@@ -11,7 +12,7 @@ const knex = require('knex')({
   }
 });
 
-(async function knexSetup(){
+(async function knexSetup() {
   const productTableExists = await knex.schema.hasTable('products')
   if (!productTableExists) {
     await knex.schema.createTable('products', table => {
@@ -29,6 +30,5 @@ const knex = require('knex')({
     })
   }
 })()
-
 
 module.exports = knex
