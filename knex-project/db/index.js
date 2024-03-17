@@ -12,12 +12,20 @@ const knex = require('knex')({
 });
 
 (async function knexSetup(){
-  const productsExists = await knex.schema.hasTable('products')
-  if (!productsExists) {
-    knex.schema.createTable('products', table => {
+  const productTableExists = await knex.schema.hasTable('products')
+  if (!productTableExists) {
+    await knex.schema.createTable('products', table => {
       table.increments()
-      table.string('name')
+      table.string('name').notNullable()
       table.string('description').nullable()
+    })
+  }
+  const userTableExists = await knex.schema.hasTable('users')
+  if (!userTableExists) {
+    await knex.schema.createTable('users', table => {
+      table.increments()
+      table.string('username', 20).notNullable().unique().index()
+      table.string('password', 32).notNullable()
     })
   }
 })()
