@@ -1,6 +1,6 @@
-const { createUserValidation } = require('../middlewares/user.middlewares')
+const { createUserValidation, deleteUserByIdValidation } = require('../middlewares/user.middlewares')
 const { validate } = require('../middlewares/common.middlewares')
-const { createUser, listAllUsers } = require('../controllers/user.controllers')
+const { createUser, listAllUsers, deleteUserById } = require('../controllers/user.controllers')
 
 const Router = require('express').Router
 
@@ -63,5 +63,29 @@ userRouter.post('/create-user', validate(createUserValidation), createUser)
  *         description: Internal server error. Something went wrong.
  */
 userRouter.get('/list-all-users', listAllUsers)
+/**
+ * @openapi
+ * /api/users/delete-user-by-id:
+ *   delete:
+ *     summary: Delete a user by ID.
+ *     description: Deletes a user from the system by its ID.
+ *     tags:
+ *       - Users
+ *     parameters:
+ *       - in: query
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: The ID of the user to delete.
+ *     responses:
+ *       204:
+ *         description: User deleted successfully.
+ *       400:
+ *         description: Bad request. The ID parameter is missing or invalid.
+ *       500:
+ *         description: Internal server error. Something went wrong.
+ */
+userRouter.delete('/delete-user-by-id', validate(deleteUserByIdValidation), deleteUserById)
 
 module.exports = userRouter

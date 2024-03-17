@@ -31,7 +31,7 @@ Location: [Product Module](./controllers/product.controllers.js)
 
 - [x] Create users.
 - [x] List all users.
-- [ ] Delete user by id.
+- [x] Delete user by id.
 
 #### Cart
 

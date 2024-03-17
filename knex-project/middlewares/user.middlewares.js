@@ -1,4 +1,4 @@
-const { body } = require('express-validator')
+const { body, query } = require('express-validator')
 
 const createUserValidation = [
   body('username').notEmpty().withMessage('Field \'username\' is required'),
@@ -21,6 +21,12 @@ const createUserValidation = [
   })
 ]
 
+const deleteUserByIdValidation = [
+  query('id').notEmpty().withMessage('Field \'id\' is required'),
+  query('id').isInt().withMessage('Field \'id\' must be an integer')
+]
+
 module.exports = {
-  createUserValidation
+  createUserValidation,
+  deleteUserByIdValidation
 }

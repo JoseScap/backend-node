@@ -1,5 +1,5 @@
 const db = require('../db')
-const { createdResponse, fatalErrorResponse, badRequestResponse, okResponse } = require('../utils/response.utils')
+const { createdResponse, fatalErrorResponse, badRequestResponse, okResponse, noContentResponse } = require('../utils/response.utils')
 
 /**
  * Creates a new user.
@@ -43,7 +43,25 @@ const listAllUsers = async (req, res) => {
   }
 }
 
+/**
+ * Deletes a user by its ID.
+ *
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
+ */
+const deleteUserById = async (req, res) => {
+  const { id } = req.query
+  try {
+    await db.table('users').where('id', id).del()
+    noContentResponse(res)
+  } catch (error) {
+    console.log(error)
+    fatalErrorResponse(res, 'Something went wrong')
+  }
+}
+
 module.exports = {
   createUser,
-  listAllUsers
+  listAllUsers,
+  deleteUserById
 }
