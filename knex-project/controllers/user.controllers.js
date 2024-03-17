@@ -35,8 +35,8 @@ const createUser = async (req, res) => {
  */
 const listAllUsers = async (req, res) => {
   try {
-    const products = await db.table('users')
-    okResponse(res, products)
+    const users = await db.table('users')
+    okResponse(res, users)
   } catch (error) {
     console.log(error)
     fatalErrorResponse(res, 'Something went wrong')
