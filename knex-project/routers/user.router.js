@@ -1,9 +1,15 @@
 const { createUserValidation } = require('../middlewares/user.middlewares')
 const { validate } = require('../middlewares/common.middlewares')
-const { createUser } = require('../controllers/user.controllers')
+const { createUser, listAllUsers } = require('../controllers/user.controllers')
 
 const Router = require('express').Router
 
+/**
+ * @openapi
+ * tags:
+ *   - name: Users
+ *     description: Module to manage data related to users
+ */
 const userRouter = Router()
 /**
  * @openapi
@@ -42,5 +48,20 @@ const userRouter = Router()
  *         description: Internal server error. Something went wrong.
  */
 userRouter.post('/create-user', validate(createUserValidation), createUser)
+/**
+ * @openapi
+ * /api/users/list-all-users:
+ *   get:
+ *     summary: Get a list of all users.
+ *     description: Retrieves a list of all users available in the system.
+ *     tags:
+ *       - Users
+ *     responses:
+ *       200:
+ *         description: A list of users retrieved successfully.
+ *       500:
+ *         description: Internal server error. Something went wrong.
+ */
+userRouter.get('/list-all-users', listAllUsers)
 
 module.exports = userRouter

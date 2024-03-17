@@ -1,5 +1,5 @@
 const db = require('../db')
-const { createdResponse, fatalErrorResponse, badRequestResponse } = require('../utils/response.utils')
+const { createdResponse, fatalErrorResponse, badRequestResponse, okResponse } = require('../utils/response.utils')
 
 /**
  * Creates a new user.
@@ -27,6 +27,23 @@ const createUser = async (req, res) => {
   }
 }
 
+/**
+ * Lists all users.
+ *
+ * @param {import('express').Request} req The request object.
+ * @param {import('express').Response} res The response object.
+ */
+const listAllUsers = async (req, res) => {
+  try {
+    const products = await db.table('users')
+    okResponse(res, products)
+  } catch (error) {
+    console.log(error)
+    fatalErrorResponse(res, 'Something went wrong')
+  }
+}
+
 module.exports = {
-  createUser
+  createUser,
+  listAllUsers
 }
