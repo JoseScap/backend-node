@@ -3,6 +3,12 @@ const { createProduct, listAllProducts, deleteProductById, listProductById, crea
 const { validate } = require('../middlewares/common.middlewares')
 const { createProductValidation, deleteProductByIdValidation, listProductByIdValidation, createProductsBulkValidation, deleteProductsByIdBulkValidation, listProductsByFiltersValidation } = require('../middlewares/product.middlewares')
 
+/**
+ * @openapi
+ * tags:
+ *   - name: Products
+ *     description: Module to manage data related to products
+ */
 const productRouter = Router()
 /**
  * @openapi
@@ -38,7 +44,7 @@ const productRouter = Router()
 productRouter.post('/create-product', validate(createProductValidation), createProduct)
 /**
  * @openapi
- * /api/products/create-products-bulk:
+ * /api/products/create-productst-bulk:
  *   post:
  *     summary: Create multiple products at once.
  *     description: Create multiple products at once by providing an array of product objects.
