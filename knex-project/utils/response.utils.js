@@ -1,14 +1,12 @@
+const ApiResponse = require('../dtos/ApiResponse')
+
 /**
  * Sends a successful response with data (HTTP 200).
  *
  * @param {import('express').Response} response The response object.
  * @param {any} data The data to be sent in the response.
  */
-const okResponse = (response, data) => response.status(200).json({
-  data,
-  status: 200,
-  errors: null
-})
+const okResponse = (response, data) => response.status(200).json(new ApiResponse(data, 200, null))
 
 /**
  * Sends a successful response with data (HTTP 201).
@@ -16,11 +14,7 @@ const okResponse = (response, data) => response.status(200).json({
  * @param {import('express').Response} response The response object.
  * @param {any} data The data to be sent in the response.
  */
-const createdResponse = (response, data) => response.status(201).json({
-  data,
-  status: 201,
-  errors: null
-})
+const createdResponse = (response, data) => response.status(201).json(new ApiResponse(data, 201, null))
 
 /**
  * Sends a no content response.
@@ -36,15 +30,11 @@ const noContentResponse = (response) => response.status(204).end()
  * @param {any} errors The errors to be sent in the response.
  */
 const badRequestResponse = (response, errors) => {
-  let array = []
-  if (Array.isArray(errors)) array = errors
-  else array = [errors]
+  let errorArray = []
+  if (Array.isArray(errors)) errorArray = errors
+  else errorArray = [errors]
 
-  return response.status(400).json({
-    data: null,
-    status: 400,
-    errors: array
-  })
+  return response.status(400).json(new ApiResponse(null, 400, errorArray))
 }
 
 /**
@@ -58,11 +48,7 @@ const notFoundResponse = (response, errors) => {
   const errorArray = Array.isArray(errors) ? errors : [errors]
 
   // Send a JSON response with a 404 status code and error details
-  return response.status(404).json({
-    data: null,
-    status: 404,
-    errors: errorArray
-  })
+  return response.status(404).json(new ApiResponse(null, 404, errorArray))
 }
 
 /**
@@ -72,15 +58,11 @@ const notFoundResponse = (response, errors) => {
  * @param {any} errors The errors to be sent in the response.
  */
 const fatalErrorResponse = (response, errors) => {
-  let array = []
-  if (Array.isArray(errors)) array = errors
-  else array = [errors]
+  let errorArray = []
+  if (Array.isArray(errors)) errorArray = errors
+  else errorArray = [errors]
 
-  return response.status(500).json({
-    data: null,
-    status: 500,
-    errors: array
-  })
+  return response.status(500).json(new ApiResponse(null, 500, errorArray))
 }
 
 module.exports = {

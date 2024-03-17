@@ -8,7 +8,7 @@ const openapiSpecifications = swaggerJsdoc({
       version: '0.1.0'
     }
   },
-  apis: ['./routers/*.js']
+  apis: ['./routers/*.js', './dtos/*.js']
 })
 
 module.exports = openapiSpecifications
