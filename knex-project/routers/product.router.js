@@ -42,10 +42,22 @@ const productRouter = Router()
  *     responses:
  *       201:
  *         description: Product created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       400:
  *         description: Bad request.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 productRouter.post('/create-product', validate(createProductValidation), createProduct)
 /**
@@ -76,10 +88,22 @@ productRouter.post('/create-product', validate(createProductValidation), createP
  *     responses:
  *       201:
  *         description: Products created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       400:
  *         description: Bad request. The request body is missing or invalid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 productRouter.post('/create-products-bulk', validate(createProductsBulkValidation), createProductsBulk)
 /**
@@ -93,8 +117,16 @@ productRouter.post('/create-products-bulk', validate(createProductsBulkValidatio
  *     responses:
  *       200:
  *         description: A list of products retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 productRouter.get('/list-all-products', listAllProducts)
 /**
@@ -115,12 +147,28 @@ productRouter.get('/list-all-products', listAllProducts)
  *     responses:
  *       200:
  *         description: Product details retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       400:
  *         description: Bad request. The request body is missing or invalid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       404:
  *         description: Product not found. The specified ID does not exist.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 productRouter.get('/list-product-by-id', validate(listProductByIdValidation), listProductById)
 /**
@@ -182,10 +230,22 @@ productRouter.get('/list-product-by-id', validate(listProductByIdValidation), li
  *     responses:
  *       200:
  *         description: Products retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       400:
  *         description: Bad request. The request contains invalid parameters.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 productRouter.get('/list-products-by-filters', validate(listProductsByFiltersValidation), listProductsByFilters)
 /**
@@ -206,10 +266,22 @@ productRouter.get('/list-products-by-filters', validate(listProductsByFiltersVal
  *     responses:
  *       204:
  *         description: Product deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       400:
  *         description: Bad request. The ID parameter is missing or invalid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 productRouter.delete('/delete-product-by-id', validate(deleteProductByIdValidation), deleteProductById)
 /**
@@ -232,10 +304,22 @@ productRouter.delete('/delete-product-by-id', validate(deleteProductByIdValidati
  *     responses:
  *       204:
  *         description: Products deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       400:
  *         description: Bad request. The IDs parameter is missing or invalid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 productRouter.delete('/delete-products-by-id-bulk', validate(deleteProductsByIdBulkValidation), deleteProductsByIdBulk)
 

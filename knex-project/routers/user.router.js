@@ -42,10 +42,22 @@ const userRouter = Router()
  *     responses:
  *       201:
  *         description: User created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       400:
  *         description: Bad request.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 userRouter.post('/create-user', validate(createUserValidation), createUser)
 /**
@@ -59,8 +71,16 @@ userRouter.post('/create-user', validate(createUserValidation), createUser)
  *     responses:
  *       200:
  *         description: A list of users retrieved successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 userRouter.get('/list-all-users', listAllUsers)
 /**
@@ -81,10 +101,22 @@ userRouter.get('/list-all-users', listAllUsers)
  *     responses:
  *       204:
  *         description: User deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       400:
  *         description: Bad request. The ID parameter is missing or invalid.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  *       500:
  *         description: Internal server error. Something went wrong.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ApiResponse'
  */
 userRouter.delete('/delete-user-by-id', validate(deleteUserByIdValidation), deleteUserById)
 
