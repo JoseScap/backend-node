@@ -1,4 +1,3 @@
-/* eslint-disable space-before-function-paren */
 const { SQLITE_FILENAME } = require('../config')
 
 const knex = require('knex')({
